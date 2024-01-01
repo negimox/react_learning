@@ -1,0 +1,20 @@
+NPM - It is not Node Package Manager or Nanannnana Pat Man.
+      It just works as a package manager.
+
+two types of dependicies normally, Dev or Normal.
+Dev: Used in dev phase
+Normal: used in production env.
+
+In npm -D is used to get the Dev build.
+
+~(tilde) or ^(caret) is used before version of dependiences.
+^ installs minor ver of dependicies automatically
+~ installs major ver of dependicies automatically
+
+After doing these things a package-lock.json file would be created.
+It keeps track of every version of dependicies installed like history of all installs.
+Also, stores other attributes like hasesh etc.
+
+Transitive dependicies: A dependicy having to depend on other dependicies which depend on other dependicies and so on.
+
+NPX is used to execute a package.

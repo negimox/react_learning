@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/negimox/react_learning/issues"
   },
-  "homepage": "https://github.com/negimox/react_learning#readme"
+  "homepage": "https://github.com/negimox/react_learning#readme",
+  "devDependencies": {
+    "parcel": "^2.10.3"
+  }
 }
