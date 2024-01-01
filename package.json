@@ -1,0 +1,22 @@
+{
+  "name": "app01",
+  "version": "1.0.0",
+  "description": "first proj using react",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/negimox/react_learning.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "negimox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/negimox/react_learning/issues"
+  },
+  "homepage": "https://github.com/negimox/react_learning#readme"
+}
