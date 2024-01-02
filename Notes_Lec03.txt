@@ -1,3 +1,0 @@
-#JSX
-- It is not HTML inside javascript. But its HTML, XML like syntax.
-- 
