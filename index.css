@@ -43,8 +43,9 @@
   width: 100%;
 }
 
-.search {
-  padding: 30px;
+.filter-btn {
+  margin: 10px;
+  cursor: pointer;
 }
 
 .footer-container {
