@@ -184,3 +184,5 @@ Check the drawing.tldr
     It require a second field setVar to modify the useState variable because of how React core algo works which finds difference between DOM and this second attribute is what triggers it.
 
   - useEffect()
+    It is called after the component is rendered. 
+

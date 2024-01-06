@@ -1,17 +1,12 @@
 import FoodCard from "./FoodCard";
 import ResData from "../utils/mockData";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Body = () => {
   // Local State Variable
   const [listOfRestaurants, setListOfRestaurants] = useState(ResData);
   // Normal JS Variable
   // let listOfRestaurants = [];
-
-  //UseEffect()
-  useEffect(()=>{
-    console.log("useEffect called.");
-  },[]);
 
   return (
     <div className="body">
