@@ -1,5 +1,7 @@
 # Lec 04, 05
 
+### "ALWAYS CODE SLOW"
+
 ## JSX:
 
 To add style inline we need to pass the style attributes as a JS Object.
@@ -94,12 +96,50 @@ All the UI is driven by a config, this allows every elements to be controlled vi
 
 ### JS
 
-Learn Map, Filter & Reduce
+<b>Common Problems</b>
 
-This is optional chaining.
-const {} = data?.data;
+- While creating a input field if you bind its value to a local variable then typing in the input field doesnt reflect on the web page.
+
+```
+const [searchText, setSearchText] = useState("");
+<input type="text" className="search-box" value={searchText} />
+```
+
+<br>
+This happens because when we bind a input field to a variable whatever is inside that variable is shown in the input field. So if we dont update the variable according to the inputed text it wont show.
+
+To fix it we use onChange attribute and update out variable.
+
+```
+<input
+  type="text"
+  className="search-box"
+  value={searchText}
+  onChange={(e) => {
+    setSearchText(e.target.value);
+  }}
+/>
+```
+
+<b> Learn </b>
+
+- Map, Filter & Reduce.
+
+- This is optional chaining `const {} = data?.data;`
+
+- Fetch
+
+- Async
+
+- CORS
+
+- Await
+
+- Optional Chaining
 
 ## React
+
+Also called single paged applications.
 
 <b>Why is it fast?</b>
 
@@ -114,11 +154,19 @@ https://github.com/acdlite/react-fiber-architecture
 
 Check the drawing.tldr
 
+### Conditional Rendering
+
+It is the rendering of web page based on condition.
+
 - ### Structing
 
   Most common method is to:
   By Components like Header, Body etc.
   By Features like Feed, Profile, Common etc.
+
+- ### Architecture
+
+  Mainly monolith and microservice are used. ( see archtecture.tldr for more information )
 
 - ### Exporting
 
@@ -156,11 +204,17 @@ Check the drawing.tldr
 - ## React Hooks
 
   A normal JS Utility Functions given by React but it has powerful functionality.
+  All react hooks start with "use".
 
   Few are:
 
-  - useState() - State Variable in react.
-    Whenever a State Variable updates React re-renders the components.
+  - useState() - State Variable in react, its basically a js function.
+
+    <b>Why is it important? Why not just use normal JS variables?</b>
+    Whenever a State Variable updates React re-renders the components, whereas if we used a normal JS variable react wouldn't know wheter the JS variable got updated or not.
+
+    <b>How does state variable value get changed even though its a const variable?</b>
+    Because it doesn't change the variables value it creates a new variable with the new value and re renders the page.
 
     ```
     //Here we are destructering array on fly.
@@ -183,6 +237,471 @@ Check the drawing.tldr
 
     It require a second field setVar to modify the useState variable because of how React core algo works which finds difference between DOM and this second attribute is what triggers it.
 
-  - useEffect()
-    It is called after the component is rendered. 
+    Things to remeber:
 
+    - Always initialize it inside body.
+    - Always initialize it at top of body.
+    - Don't initialize it inside conditional statements or loops or functions because these create inconsistencies.
+
+  - useEffect(): Is called after every render of the component. / It is called after all the components are rendered in an app.
+
+    ```
+    //Syntax
+    useEffect(() => {
+      function();
+    }, []);
+
+    //This empty array is known as dependency array.
+    function();
+    ```
+
+    If dependency array is empty [] ==> then useEffect is called only on initial render.
+
+    If no dependency array isn't there ==> then useEffect called on every render.
+
+    If dependency array is ["variable"] ==> called everytime variable is updated.
+
+- ## Shimmer UI
+
+  It refers to a techique where we show fake empty UI for a better percievd smootness of web applicaiton.
+
+- ## Routing
+
+  ### Types
+
+  - Client Side Routing
+    No network call is made, only components get changed.
+
+  - Server Side Routing
+    The html page is obtained from a server.
+
+  Using "React Router DOM" library.
+  First we will have to create router configuration.
+
+  ```
+  // This allows us to create the config
+  import { createBroserRouter } from "react-router-dom"
+
+  // This allows our app to acess the routes.
+  import { RouterProvider }
+
+  const appRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <AppLayout />,
+
+      //This component is shown when an error in routing occurs
+      errorElement: <Error />,
+    },
+    {
+      path: "/about",
+      element: <About />,
+    },
+  ]);
+
+  root.render(<RouterProvider router={appRouter} />);
+  ```
+
+  It also provides a hook, "useRouteError" this gives us a array of data about the error occuring during routing.
+
+  ### Children
+
+  ```
+  {
+    path: "/",
+    element: <AppLayout />,
+
+    children: [
+      {
+        path: "/about",
+        element: <About/>,
+      },
+      {
+        path: "/",
+        element: <Home/>,
+      },
+    ]
+  }
+  ```
+
+  <Outlet /> whenever there is a change in path, this component is filled with children according to the path.
+
+  ### Navigating to Different Pages
+
+  Instead of using anchor tags we use <Link></Link>.
+  <Link> is also using anchor tag bheind the scene, but it works as a wrapper and keeps a track of it.
+  Why?
+  Because if used anchor tags then it would refreshes the whole web pages whereas <Link> re render the components.
+
+  ```
+  import {Link} from react-router-dom
+
+  <li>
+    <Link to="/page">Page</Link>
+  </li>
+  ```
+
+- ## Dynamic Routing
+
+  ```
+  {
+    path: "/restaurants/:resId",
+    element: <RestaurantMenu />,
+  }
+  // resId here is a paramsId which is useful.
+  ```
+
+  useParams hook given by react-router-dom.
+
+  ```
+  import {useParams} from "react-router-dom"
+
+  const { resId } = useParams();
+
+  ```
+
+- ## Class Based Components
+
+  It is a class which has a render method which returns a JSX.
+
+  ```
+  import React from "react"
+
+
+  class Name extends React.Component{
+    render() {
+      return (<div>This is a class based component.</div>);
+    }
+  }
+  ```
+
+  ## To access props.
+
+  ```
+  constructor(props) {
+    super(props);
+
+    console.log(props);
+  }
+  ```
+
+  Why write super(props)?
+
+  ## To make, use State Variable
+
+  For initialization:
+
+  ```
+  //We also make state variable inside constructor()
+  constructor(){
+    this.state = {
+      var1: 0,
+      var2: 0,
+    };
+  }
+  ```
+
+  To use,update it:
+
+  ```
+  render(){
+    return(
+      <div>
+        <h2>{this.state.var1}</h2>
+        <button onClick={()=>{
+
+          /To update it we use a function called setState() which take the update values as input.
+          this.setState({
+            var1: this.state.var1 + 1,
+          })
+        }}>
+        Increase Var1
+        </button>
+      </div>
+    );
+  }
+  ```
+
+  ## Mounted, its Lifecycle
+
+  https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+  Whenever the class is called at first constructor is always called.
+  Contructor ==> Render ==> componentDidMount
+
+  For Parent, Children relationship:
+
+  - Parent_Contructor
+  - Parent_Render
+    - Children_Contructor
+    - Children_Render
+    - Children_componentDidMount
+  - Parent_componentDidMount
+
+  For Parent, Multiple Children relationship:
+
+  - Parent_Contructor
+  - Parent_Render
+
+    - Children_1_Contructor
+    - Children_1_Render
+
+    - Children_2_Contructor
+    - Children_2_Render
+
+    **It batches Render of both children to optimize itself because manipulating dom is expensive so it batches render which batches rendering of DOM**
+
+    <DOM UPDATED - In Single Batches>
+
+    - Children_1_ComponentDidMount
+    - Children_2_ComponentDidMount
+
+  - Parent_ComponentDidMount
+
+  ## Update
+
+  - Render
+    < DOM UPDATED >
+  - Component Did Mount
+
+  ## Unmount
+
+  Called when the component is unmounted/ when we leave the page.
+
+  ## componentDidMount
+
+  Another function given to us by React.Component. Mostly used for API calls.
+
+- ## Functional Components
+
+  **This code wont stop logging "INTERVAL" even after we change components because we aren't stopping it upon Unmounting.**
+
+  ```
+  useState(()=>{
+    setInterval(()=>{
+      console.log("INTERVAL.")
+    })
+  },[])
+  ```
+
+  **To fix it we use:**
+
+  ```
+  useState(()=>{
+    const timer = setInterval(()=>{
+      console.log("INTERVAL.")
+    })
+
+    // This function is called while Unmounting.
+    return() =>{
+      clearInterval(timer);
+    };
+  },[])
+  ```
+
+- ## Optimizing App
+
+  By following many steps:-
+
+  - ## Single Responsibility Principal
+
+    It means that all components should have only one responsibility.
+
+    By using:
+
+    ## Custom Hooks
+
+    Similar to utility functions.At the end hooks are just js function which return a StateVariable for our usage.
+
+    Some use case is for fetching api:
+
+    ```
+    import { useState, useEffect } from "react";
+    import { RESTAURANT_API } from "./constant";
+
+    const useRestaurantCard = () => {
+      const [listOfRestaurants, setListOfRestaurants] = useState(null);
+      useEffect(() => {
+        fetchData();
+      });
+
+      const fetchData = async () => {
+        const data = await fetch(RESTAURANT_API);
+        const json = await data.json();
+
+        setListOfRestaurants(
+          json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        );
+      };
+
+      return listOfRestaurants;
+    };
+
+    export default useRestaurantCard;
+    ```
+
+  - ## Chunking/Code Splitting/Dynamic Bundling/Lazy Loading/On Demand Loading/Dynamic Import
+
+    It means splitting the app or logically breaking the app into different bundles which have smaller chunks. It also only loads that bundle when required.
+
+    ```
+    import {lazy} from "react"
+
+    const Bundle = lazy(() => import("./component/Bundle"));
+    ```
+
+    As it loads on demand we will need to use <Suspense> before our component call,
+
+    ```
+    import {Suspense} from react;
+
+    <Suspense fallback={<h1>Loading..</h1>}> <Bundle/> </Suspense>
+
+    ```
+
+- ## Styling
+
+  - Sass
+    It is not a recommended way, its not scalable.
+  - Styled Components
+    Good.
+  - Library & Framworks
+    It has prebuilt components.
+    - Material UI
+    - Bootstrap
+    - Chakra UI
+    - Ant Design
+  - Tailwind CSS
+    Its a framework.This is used in this project.
+
+- ## Tailwind CSS
+
+  Pros:
+
+  - No switching between css, jsx.
+  - Lightweight
+
+  Cons:
+
+  - Very clutery as the className get very big like very very big.
+
+- ## Higher Order Components
+
+  Is a function that takes a components, then enhances it and returns it. They are pure function meaning we dont modify the base component we are only enhancing it.
+
+  ```
+  const component = (){
+    return(
+      <div></div>
+    )
+  }
+
+  export const higherOrderComponent = (component) =>{
+    return(props)=>{
+      return(
+        <div>This is a higher order component.</div>
+
+        //Here we are passing the props provided to high order component to the orignal component.
+        <component {...props} />
+      );
+    };
+  };
+
+  export default component;
+
+  ```
+
+- ## Controlled
+  Meaning the parent has control over the state of the the component.
+  Used in:
+  - Lifting the state up.
+    This refers to where when calling a component we pass the setState() function as props so that the child can alter it.
+    ```
+    <RestaurantCategory
+      key={menu?.card?.card?.title}
+      data={menu}
+      showItems={index === showIndex && true}
+      setShowIndex={() => setShowIndex(index)}
+    />
+    ```
+- ## Uncontrolled Components
+
+  If a component has control of its own state.
+
+- ## Props Drilling
+
+  It refers to how if we want to access some data of the parent of a component of the parent. So if the leaf/bottom most child wants to access it the data will have to pass through all other cousions.
+
+  We should avoid such props drilling.
+  Fix:-
+
+- ## Context
+
+  It is like a global place which any component can access.
+
+  Creation:
+
+  ```
+  import { createContext } from "react";
+
+  const UserContext = createContext({
+    loggedInUser: "Default",
+  });
+
+  export default UserContext;
+
+  ```
+
+  Usage:
+
+  ```
+  import {useContext} from "react";
+  import UserContext from ".../utils/UserContext"
+
+  const data = useContext(UserContext);
+
+  // To use it in a class based component.
+  <UserContext.Consumer>
+    {(data) => {
+      console.log(data);
+    }}
+  </UserContext.Consumer>
+  ```
+
+  Override Default Value:
+
+  ```
+  // We need to wrap out top most parent inside <UserContext.Provider>
+
+  const [UsernameVariable, setUsernameVariable] = useState();
+
+
+  return(
+    <UserContext.Provider value={{logged InUser: UsernameVariable}}>
+      <header/>
+      <body/>
+    </UserContext.Provider>
+  )
+  ```
+
+  Updating:
+
+  ```
+  //In parent
+  const [UsernameVariable, setUsernameVariable] = useState();
+
+  return(
+    <UserContext.Provider value={{logged InUser: UsernameVariable, setUsernameVariable}}>
+      <header/>
+      <body/>
+    </UserContext.Provider>
+  )
+
+  //In some component
+  import UserContext from "./UserContext.js"
+
+  const {setUsername} = useContext(UserContext);
+
+  onChange={(e) => setUserName(e.target.value)}
+
+  ```
