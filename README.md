@@ -1,4 +1,4 @@
-#NPM
+# NPM
 - It is not Node Package Manager or Nanannnana Pat Man.
 - It just works as a package manager.
 
@@ -26,10 +26,10 @@ you add it by in the script block inserting "script_name": "command"
 
 
 
-==> NPX 
+# NPX 
 It's used to execute a package.
 
-===> Parcel
+# Parcel
 - "npx parcel file_name"
 - Its a local server
 - HMR: Hot Module Replacement
