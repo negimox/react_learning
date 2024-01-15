@@ -137,6 +137,17 @@ To fix it we use onChange attribute and update out variable.
 
 - Optional Chaining
 
+<b>Find out</b>
+
+- Difference between:
+
+  ```
+  onClick={function}
+  onClick={()=> function(item)}
+  onClick={function(item)}
+
+  ```
+
 ## React
 
 Also called single paged applications.
@@ -705,3 +716,78 @@ It is the rendering of web page based on condition.
   onChange={(e) => setUserName(e.target.value)}
 
   ```
+
+- ## Redux [State Management]
+
+  Always remember Redux isn't mandatory. Only in a application which have lot of components.
+
+  ### Advantage
+
+  - Easier to debug apps.
+  - Its a state manager.
+
+  In this project we have used:
+
+  ### Redux Toolkit & React-Redux
+
+  - Easier to use comparatively to Redux.
+  - Reduces boilerplate code.
+  - Very good for debugging.
+
+  Usage:
+
+  - npm install @reduxjs/toolkit and react-redux
+  - Build store.
+  - Connect our store to app.
+  - Slice (cartSlice)
+  - dispatch(action)
+  - Selector
+
+    ## Building the store
+
+    ```
+    import {createSlice} from "@reduxjs/toolkit"
+
+    const cartSlice = createSlice({
+      name: 'cart',
+      initialState:
+      {
+        items:[],
+      },
+      reducers:
+      {
+        addItem:(state,action) =>
+        {
+          state.items.push(action.payload)
+        },
+        clearCart:(state,action)=>
+        {
+          state.items.length = 0;
+          //OR
+          return{items:[]}; //THIS NEW [] will be replaced inside orignalState.
+
+          // Here we can't use:
+          // state = [""];
+          // Because it doesn't actually mutate the state only makes a reference.
+          // Or it is like we are trying to change a local state variable but the actual/orignal state variable isn't altered.
+        },
+      },
+    })
+
+    export const{addItem}=cartSlice.actions;
+
+    export default carSlice.reducer;
+    ```
+
+    <b>Make sure to only subscribe using useSelector to data u need not the whole store.</b>
+
+    <b>Reducers</b>
+    Learn more about reducers.
+
+    Directly mutating the state was not recommended in Vanila Redux, a copy of state had to be created before mutating the state.
+
+    But now in this version we have to `mutate the state or return a new state`, it still keeps state as immutable i.e. bheind the scene it works the same but it now does those extra steps itself it uses Immer lib to find difference between new state and the previous.
+
+    ## More things to learn:
+
+    - RTK Query ( Earlier we used middleware, thumb)

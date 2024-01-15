@@ -12,14 +12,11 @@ const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
     setShowIndex();
   };
   return (
-    <div
-      className="menu-information hover:cursor-pointer"
-      onClick={handleClick}
-    >
+    <div className="menu-information hover:cursor-pointer">
       {/* ACCORDION HEADER*/}
       <div className="styles_bold_divider"></div>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between" onClick={handleClick}>
         <span className="font-bold text-xl">
           {title}
           {" ("}
