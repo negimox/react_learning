@@ -25,59 +25,60 @@ const Body = () => {
   }
 
   return (
-    <div className="body">
-      <div className="filter flex items-center">
-        <div className="search m-4 p-4">
-          <input
-            type="text"
-            className="border border-solid border-black"
-            value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
-          />
-          <button
-            className="px-4 py-1 m-4 bg-gray-200 rounded-lg"
-            onClick={() => {
-              //Filter the restaurant card n update UI
-              const filteredRes = listOfRestaurants.filter((res) =>
-                res.info.name.toLowerCase().includes(searchText.toLowerCase())
-              );
-              setFilteredRestaurants(filteredRes);
-            }}
-          >
-            Search
-          </button>
-        </div>
+    <div className="mx-[120px]">
+      <div className="filter flex justify-left items-center my-10">
+        <input
+          type="text"
+          className="my-2 mx-4 rounded-lg border-2 border-solid border-black"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+        />
+        <button
+          className="my-2 mx-1 px-4 py-1 bg-gray-200 rounded-lg"
+          onClick={() => {
+            //Filter the restaurant card n update UI
+            const filteredRes = listOfRestaurants.filter((res) =>
+              res.info.name.toLowerCase().includes(searchText.toLowerCase())
+            );
+            setFilteredRestaurants(filteredRes);
+          }}
+        >
+          Search
+        </button>
 
-        <div className="search m-4 p-4">
-          <button
-            className="px-4 py-2 bg-gray-200 rounded-lg"
-            onClick={() => {
-              setListOfRestaurants(
-                listOfRestaurants.filter((res) => res.info.avgRating > 4.3)
-              );
-            }}
-          >
-            Top Rated Restaurants
-          </button>
-        </div>
+        <button
+          className="my-2 mx-4 px-4 py-2 bg-gray-200 rounded-lg"
+          onClick={() => {
+            setListOfRestaurants(
+              listOfRestaurants.filter((res) => res.info.avgRating > 4.3)
+            );
+          }}
+        >
+          Top Rated Restaurants
+        </button>
       </div>
-      <div className="flex flex-wrap">
+
+      <div className="flex flex-wrap justify-center">
         {filteredRestaurants.map((restaurant) => (
-          <Link
-            key={restaurant.info.id}
-            to={"/restaurants/" + restaurant.info.id}
-          >
-            {
-              /* IF RES IS OPEN THEN ADD OPEN LABEL */
-              restaurant.info.isOpen ? (
-                <FoodCardOpen resData={restaurant} />
-              ) : (
-                <FoodCard resData={restaurant} />
-              )
-            }
-          </Link>
+          <div className="mx-3 my-10">
+            <Link
+              key={restaurant.info.id}
+              to={"/restaurants/" + restaurant.info.id}
+            >
+              <div className="transform hover:scale-[.97] hover:cursor-pointer transition-transform duration-250">
+                {
+                  /* IF RES IS OPEN THEN ADD OPEN LABEL */
+                  restaurant.info.isOpen ? (
+                    <FoodCardOpen resData={restaurant} />
+                  ) : (
+                    <FoodCard resData={restaurant} />
+                  )
+                }
+              </div>
+            </Link>
+          </div>
         ))}
       </div>
     </div>

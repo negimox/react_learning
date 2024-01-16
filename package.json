@@ -1,7 +1,7 @@
 {
-  "name": "app01",
+  "name": "quickcuisine",
   "version": "1.0.0",
-  "description": "first proj using react",
+  "description": "Food odering app.",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",

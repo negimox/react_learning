@@ -11,7 +11,7 @@ const RestaurantItem = ({ data }) => {
     dispatch(addItem(data));
   };
   return (
-    <div className="">
+    <div>
       <div className="styles_divider"></div>
       <div className="menu-information-single relative">
         <b>
@@ -22,7 +22,12 @@ const RestaurantItem = ({ data }) => {
             {price / 100 || defaultPrice / 100}
           </h4>
         </b>
-        {imageId && <img className="menu-img" src={CDN_URL + imageId} />}
+        {imageId && (
+          <img
+            className="w-[148px] h-[126px] rounded-lg mx-5"
+            src={CDN_URL + imageId}
+          />
+        )}
         <div className="absolute right-[3%] -bottom-4">
           <button
             className="p-2 bg-slate-800 hover:bg-slate-500 text-white shadow-lg rounded-lg"

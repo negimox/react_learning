@@ -20,7 +20,7 @@ const Grocery = lazy(() => import("./components/Grocery"));
 const AppLayout = () => {
   return (
     <Provider store={appStore}>
-      <div className="app">
+      <div>
         {/* {useStatus() === false && <Status />} */}
         <Status />
         <Header />

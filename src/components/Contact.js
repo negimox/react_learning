@@ -1,6 +1,6 @@
 import UserClass from "./UserClass";
 import { Component } from "react";
-import UserContext from "../utils/UserContext";
+// import UserContext from "../utils/UserContext";
 
 class Contact extends Component {
   constructor(props) {
@@ -18,11 +18,12 @@ class Contact extends Component {
       <div>
         <h1>Contact Us</h1>
         <h2>+91 1234567890</h2>
-        <UserContext.Consumer>
+        {/* Example of using Context in class based components 
+         <UserContext.Consumer>
           {(data) => {
-            console.log(data);
+            //console.log(data);
           }}
-        </UserContext.Consumer>
+        </UserContext.Consumer> */}
         <UserClass name={"Chetan Pandey (classes)"} />
       </div>
     );

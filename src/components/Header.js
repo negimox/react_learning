@@ -10,42 +10,38 @@ const Header = () => {
 
   // Subscribing to store using selector.
   const cartItems = useSelector((store) => store.cart.items);
-  console.log(cartItems);
 
   return (
-    <div className="flex justify-between shadow-lg mb-5">
-      <div className="px-4 mx-4">
+    <div className="flex justify-between shadow-lg mb-5 px-5">
+      <div>
         <img className="w-32" src={LOGO_URL} />
       </div>
 
-      <div className="flex items-center">
-        <ul className="flex px-4 mx-4">
-          <li className="px-5 hover:text-sky-700 border-b-4 border-transparent hover:border-b-4 hover:border-solid transition font-bold">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="px-5 hover:text-sky-700 border-b-4 border-transparent hover:border-b-4 transition font-bold">
-            <Link to="/grocery">Grocery</Link>
-          </li>
-          <li className="px-5 hover:text-sky-700 border-b-4 border-transparent hover:border-b-4 transition font-bold">
-            <Link to="/about">About Us</Link>
-          </li>
-          <li className="px-5 hover:text-sky-700 border-b-4 border-transparent hover:border-b-4 transition font-bold">
-            <Link to="/contact">Contact Us</Link>
-          </li>
-          <li className="px-5 hover:text-sky-700 border-b-4 border-transparent hover:border-b-4 transition font-bold">
-            <Link to="/cart">Cart - ({cartItems.length})</Link>
-          </li>
-          <button
-            className="px-5 hover:text-sky-700 border-b-4 border-transparent hover:border-b-4 transition font-bold"
-            onClick={() => {
-              btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
-            }}
-          >
-            {btnName}
-          </button>
-          <li className="font-bold px-5">{loggedInUser}</li>
-        </ul>
-      </div>
+      <ul className="flex items-center">
+        <li className="px-5 hover:text-sky-700 hover:border-b-4 hover:border-solid transition-all duration-100 font-bold">
+          <Link to="/">Home</Link>
+        </li>
+        <li className="px-5 hover:text-sky-700 hover:border-b-4 transition-all duration-100 font-bold">
+          <Link to="/grocery">Grocery</Link>
+        </li>
+
+        <li className="px-5 hover:text-sky-700 hover:border-b-4 transition-all duration-100 font-bold">
+          <Link to="/cart">Cart - ({cartItems.length})</Link>
+        </li>
+        <button
+          className="px-5 hover:text-sky-700 hover:border-b-4 transition-all duration-100 font-bold"
+          onClick={() => {
+            btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
+          }}
+        >
+          {btnName}
+        </button>
+        {btnName === "Logout" && (
+          <div className="rounded-full bg-slate-500 w-auto ">
+            <li className="font-bold text-[13px] px-5">{loggedInUser}</li>
+          </div>
+        )}
+      </ul>
     </div>
   );
 };

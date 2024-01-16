@@ -8,7 +8,7 @@ const FoodCard = (props) => {
   const { deliveryTime } = resData.info.sla;
 
   return (
-    <div className="hover:scale-96 hover:cursor-pointer m-3 w-[350px] h-[395px] relative transition-all duration-500">
+    <div className="w-[350px] h-[395px] relative">
       <img
         className="rounded-lg w-[100%] h-[55%] block object-cover"
         alt="res-logo"
@@ -16,7 +16,7 @@ const FoodCard = (props) => {
       />
 
       <div className="h-[25%] w-[100%] inline-block absolute bottom-[45%] left-0 rounded-lg bg-gradient-to-t from-black to-transparent">
-        <div className="text-white inline-block absolute text-[26px] top-[55%] px-4">
+        <div className="text-white inline-block absolute text-[18px] top-[55%] px-4">
           <h4 className="font-bold">{costForTwo.toUpperCase()}</h4>
         </div>
       </div>
@@ -34,8 +34,10 @@ const FoodCard = (props) => {
 export const withOpenLabel = (FoodCard) => {
   return (props) => {
     return (
-      <div>
-        <label className="">OPEN</label>
+      <div className="relative">
+        <label className="bg-green-400 rounded-lg px-3 py-1 absolute -top-2 z-50">
+          OPEN
+        </label>
         <FoodCard {...props} />
       </div>
     );
