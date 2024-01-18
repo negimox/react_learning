@@ -47,15 +47,29 @@ npx create-react-app project_name
 
 - # More Hooks
 
-  ## useRef
+  - ## useRef
 
-      This allows use to refrence the value linked to an element.
-      ```
-      import {useRef} from "react";
+    This allows use to refrence the value linked to an element.
 
-      const mail = useRef(null)
+    ```
+    import {useRef} from "react";
 
-      ...
-      <input ref={mail} type="text" placeholder="Email"/>
-      ```
-      this will put a object of input in mail when we submit the form.
+    const mail = useRef(null)
+
+    ...
+    <input ref={mail} type="text" placeholder="Email"/>
+    ```
+
+    this will put a object of input in mail when we submit the form.
+
+# Firebase
+
+- ## Deployment
+  ```
+  npm i -g firebase-tools
+  firebase login
+  firebar init ( Select hosting )
+  firebase deploy
+  ```
+- ## Other Features
+  Read firebase docs for detailed code of features like sign in, sign out, sign up etc.
