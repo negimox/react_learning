@@ -1,42 +1,138 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
+import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import Header from "./Header";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isSignInForm, setIsSignInForm] = useState([true]);
+  const [errMessage, setErrMessage] = useState(null);
+
+  const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
 
   const toggleSignInForm = () => {
+    setErrMessage(null);
     setIsSignInForm(!isSignInForm);
+  };
+
+  const handleButtonClick = () => {
+    const message = checkValidData(email.current.value, password.current.value);
+    setErrMessage(message);
+
+    if (message) return;
+
+    if (!isSignInForm) {
+      //Sign Up Logic
+
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL:
+              "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png",
+          })
+            .then(() => {
+              // Profile updated!
+              const { displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setErrMessage(error.message);
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrMessage(errorCode + "- " + errorMessage);
+          // ..
+        });
+    } else {
+      //Sign In Logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          navigate("/browse");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrMessage(errorCode + "- " + errorMessage);
+        });
+    }
   };
 
   return (
     <div className="relative">
+      <Header />
       <div className="bg-black/60 w-full h-full absolute z-9"></div>
       <img
         className="z-7"
         src="https://assets.nflxext.com/ffe/siteui/vlv3/16006346-87f9-4226-bc25-a1fb346a2b0c/9662d0fd-0547-4665-b887-771617268815/IN-en-20240115-popsignuptwoweeks-perspective_alpha_website_large.jpg"
         alt="bg"
       />
-      <form className="text-white rounded-md right-0 left-0 top-0 mx-auto my-24 absolute w-3/12 p-12 bg-black/65">
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+        className="text-white rounded-md right-0 left-0 top-0 mx-auto my-24 absolute w-3/12 p-12 bg-black/65"
+      >
         <h1 className="text-3xl font-bold my-8">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
+        <h2 className="text-red-700 text-lg font-bold my-4">{errMessage}</h2>
         {!isSignInForm && (
           <input
+            ref={name}
             type="text"
             placeholder="Full Name"
             className="rounded-md p-4 my-4 w-full bg-neutral-800"
           />
         )}
         <input
+          ref={email}
           type="text"
           placeholder="Email Address"
           className="rounded-md p-4 my-4 w-full bg-neutral-800"
         />
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className="rounded-md p-4 my-4 w-full bg-neutral-800"
         />
-        <button className="hover:cursor-pointer rounded-md px-2 py-4 my-8 bg-red-700 w-full">
+        <button
+          className="hover:cursor-pointer rounded-md px-2 py-4 my-8 bg-red-700 w-full"
+          onClick={handleButtonClick}
+        >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         <p

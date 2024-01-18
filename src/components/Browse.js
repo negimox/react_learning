@@ -1,7 +1,11 @@
-import React from "react";
+import Header from "./Header";
 
 const Browse = () => {
-  return <div>Browse</div>;
+  return (
+    <div className="z-11">
+      <Header />
+    </div>
+  );
 };
 
 export default Browse;

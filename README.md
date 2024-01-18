@@ -1,9 +1,20 @@
 # Lec 14-16
 
-### "ALWAYS CODE SLOW"
+### "LEARN HOW TO READ DOCS."
+
+## Topics Overview
+
+- Form Validation
+- useRef Hook
+- Firebase
+- Authentication
+- Implement Sign In/ Up API
+- Redux Store w/ User Slice
+- Implemented Profile, Sign out, Update Profile call
 
 ## Features
 
+- Routing Of App
 - Login/Signup Page
 
   - Sign in/ Login page
@@ -12,12 +23,13 @@
 
 - Browse (Ater Auth)
 
-  - Header
-  - Main Movie/ Promoted
-    - Trailer in bg
-    - Title & Desc
-    - Movie Suggestions
-      - Movie List\*n
+- Header
+- Main Movie/ Promoted
+
+  - Trailer in bg
+  - Title & Desc
+  - Movie Suggestions
+    - Movie List\*n
 
 - NetflixGPT
   - Search Bar
@@ -30,3 +42,20 @@ This create a demo app with pre configured settings. It uses webpack bheind the 
 ```
 npx create-react-app project_name
 ```
+
+## React
+
+- # More Hooks
+
+  ## useRef
+
+      This allows use to refrence the value linked to an element.
+      ```
+      import {useRef} from "react";
+
+      const mail = useRef(null)
+
+      ...
+      <input ref={mail} type="text" placeholder="Email"/>
+      ```
+      this will put a object of input in mail when we submit the form.
