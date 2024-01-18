@@ -5,7 +5,11 @@
 ## Features
 
 - Login/Signup Page
+
   - Sign in/ Login page
+  - Form Validation
+    - Using Formik ( For forms having very big data)
+
 - Browse (Ater Auth)
 
   - Header
