@@ -11,6 +11,7 @@
 - Implement Sign In/ Up API
 - Redux Store w/ User Slice
 - Implemented Profile, Sign out, Update Profile call
+- Movie Data API
 
 ## Features
 
@@ -23,17 +24,17 @@
 
 - Browse (Ater Auth)
 
-- Header
-- Main Movie/ Promoted
+  - Header
+  - Main Movie/ Promoted
 
-  - Trailer in bg
-  - Title & Desc
-  - Movie Suggestions
-    - Movie List\*n
+    - Trailer in bg
+    - Title & Desc
+    - Movie Suggestions
+      - Movie List\*n
 
-- NetflixGPT
-  - Search Bar
-  - Response
+  - NetflixGPT
+    - Search Bar
+    - Response
 
 ## createReact app / Scaffold, Demo application
 
@@ -73,3 +74,19 @@ npx create-react-app project_name
   ```
 - ## Other Features
   Read firebase docs for detailed code of features like sign in, sign out, sign up etc.
+
+# TMDB
+
+- ## Deployment
+
+  Get API token by making a account on tmdb.
+
+  ```
+  const options = {method: 'GET', headers: {accept: 'application/json'}};
+
+  fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options)
+
+  ```
+
+- ## API Calls are made twice
+  This happens because of React.StrictMode inside the top most root level. But this only happens twice on local/ development mode this is good as it allows us to see inconsistensy between calls.

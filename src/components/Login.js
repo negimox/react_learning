@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import { checkValidData } from "../utils/validate";
 import {
@@ -10,9 +9,9 @@ import { auth } from "../utils/firebase";
 import Header from "./Header";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { DEFAULT_AVATAR, BG_URL } from "../utils/constants";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSignInForm, setIsSignInForm] = useState([true]);
   const [errMessage, setErrMessage] = useState(null);
@@ -44,8 +43,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL:
-              "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png",
+            photoURL: DEFAULT_AVATAR,
           })
             .then(() => {
               // Profile updated!
@@ -56,7 +54,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               setErrMessage(error.message);
@@ -78,7 +75,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate("/browse");
           // ...
         })
         .catch((error) => {
@@ -93,11 +89,7 @@ const Login = () => {
     <div className="relative">
       <Header />
       <div className="bg-black/60 w-full h-full absolute z-9"></div>
-      <img
-        className="z-7"
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/16006346-87f9-4226-bc25-a1fb346a2b0c/9662d0fd-0547-4665-b887-771617268815/IN-en-20240115-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-        alt="bg"
-      />
+      <img className="z-7" src={BG_URL} alt="bg" />
 
       <form
         onSubmit={(e) => {
