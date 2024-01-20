@@ -14,7 +14,7 @@ const VideoBackground = ({ movieID }) => {
           "?autoplay=1&mute=1&loop=1&color=white&controls=0&modestbranding=1&playsinline=1&rel=0&playlist=" +
           trailerVideo?.key
         }
-        title="YouTube video player"
+        title="Trailer"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       ></iframe>

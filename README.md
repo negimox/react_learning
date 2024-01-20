@@ -12,6 +12,7 @@
 - Redux Store w/ User Slice
 - Implemented Profile, Sign out, Update Profile call
 - Movie Data API
+- GPT Search
 
 ## Features
 

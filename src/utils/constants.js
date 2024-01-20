@@ -57,3 +57,9 @@ export const ICO_RIGHT_ARROW = () => {
     </svg>
   );
 };
+
+export const SUPPORTED_LANG = [
+  { identifier: "en", name: "English" },
+  { identifier: "hi", name: "Hindi" },
+  { identifier: "sp", name: "Spanish" },
+];
