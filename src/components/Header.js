@@ -53,10 +53,10 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
   return (
-    <div className="absolute flex justify-between px-8 py-2 z-10 w-full bg-gradient-to-b from-black">
-      <img className="w-44" src={LOGO_URL} alt="logo" />
+    <div className="absolute flex flex-col justify-center md:flex-row md:justify-between px-8 py-2 z-10 w-screen bg-gradient-to-b from-blacks">
+      <img className="w-44 mx-auto md:mx-0" src={LOGO_URL} alt="logo" />
       {userData && (
-        <div className="flex px-8 py-2 items-center">
+        <div className="flex flex-wrap mx-auto md:mx-0 md:px-8 md:py-2 items-center">
           {gptView && (
             <select
               className="p-2 bg-neutral-600 text-white rounded-md"
@@ -70,7 +70,7 @@ const Header = () => {
             </select>
           )}
           <button
-            className="py-2 px-3 mx-8 bg-red-600 hover:bg-red-700 text-white rounded-md"
+            className="py-2 px-3 mx-3 md:mx-8 bg-red-600 hover:bg-red-700 text-white rounded-md"
             onClick={handleGptSearchClick}
           >
             {gptView ? "Home" : "GPT Search"}
@@ -80,12 +80,14 @@ const Header = () => {
             src={userData.photoURL}
             alt="usr_ico"
           />
-          <h2 className="font-bold text-lg text-white px-3">
-            {userData.displayName}
-          </h2>
-          <button onClick={handleClick} className="text-white px-3 font-bold">
-            Sign Out
-          </button>
+          <div className="flex flex-col md:flex-row py-2">
+            <h2 className="font-bold text-sm md:text-lg text-white px-3">
+              {userData.displayName}
+            </h2>
+            <button onClick={handleClick} className="text-white px-3 font-bold">
+              Sign Out
+            </button>
+          </div>
         </div>
       )}
     </div>

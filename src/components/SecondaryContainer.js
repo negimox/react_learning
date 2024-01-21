@@ -12,8 +12,8 @@ const SecondaryContainer = () => {
   )
     return;
   return (
-    <div className="bg-black">
-      <div className="-mt-64 pl-12 relative z-12">
+    <div className="bg-black md:pt-16 lg:pt-0">
+      <div className="lg:-mt-[12%] md:mt-0 mt-0 pl-1 lg:pl-12 relative z-12">
         <MovieList
           title={"Now Playing"}
           movies={movies.nowPlayingMovies.slice(1)}

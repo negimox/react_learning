@@ -24,6 +24,7 @@ const Browse = () => {
       ) : (
         <>
           <MainContainer />
+
           <SecondaryContainer />
         </>
       )}

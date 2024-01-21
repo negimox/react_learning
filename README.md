@@ -13,6 +13,9 @@
 - Implemented Profile, Sign out, Update Profile call
 - Movie Data API
 - GPT Search
+- GPT Results
+- Responsive Design
+- Memoization
 
 ## Features
 
@@ -64,6 +67,29 @@ npx create-react-app project_name
 
     this will put a object of input in mail when we submit the form.
 
+- # Hiding Important API Keys
+
+  By creating a .env file at root level.
+
+  .env File:
+
+  ```
+  // REACT_APP needs to be added before the variable name.
+  REACT_APP_KEY_NAME=key-value
+  ```
+
+  Usage:
+
+  ```
+  process.env.REACT_APP_KEY_NAME
+  ```
+
+  While pushing also make sure to not push .env file.
+
+- # Memoization
+  Used to reduce additional/unncessary API calls.
+  By adding a check condition to only make API calls if the value is null.
+
 # Firebase
 
 - ## Deployment
@@ -91,3 +117,9 @@ npx create-react-app project_name
 
 - ## API Calls are made twice
   This happens because of React.StrictMode inside the top most root level. But this only happens twice on local/ development mode this is good as it allows us to see inconsistensy between calls.
+
+## JS
+
+Learn:
+
+- Promise.all

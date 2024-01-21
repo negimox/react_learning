@@ -13,8 +13,7 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NmIzNTIyZGY3NzQzZGMzYjUwY2ZhYTcwZDRiOGRjZiIsInN1YiI6IjY1YWEyOWU2NmFmOGY4MDEyY2JlNjIwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iqodgJPbhvjNTa-oYSC7kej8ee2MDxrMcmjXDysZ2aA",
+    Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
   },
 };
 
@@ -53,6 +52,25 @@ export const ICO_RIGHT_ARROW = () => {
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+      />
+    </svg>
+  );
+};
+
+export const ICO_SEARCH = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
       />
     </svg>
   );
