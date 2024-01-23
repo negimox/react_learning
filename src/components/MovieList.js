@@ -15,8 +15,8 @@ const MovieList = ({ movies, title, index }) => {
           {movies.length > 7 && <Arrow type="l" index={index} />}
           <div className="flex justify-center">
             {movies.map((item, index) => (
-              <div className={index === 0 ? "md:pl-9 m-auto" : "m-auto"}>
-                <div className="transition-all duration-200 hover:scale-x-[240%] hover:cursor-pointer">
+              <div className={index === 0 ? "m-auto ml-8 mr-4" : "m-auto pr-4"}>
+                <div className="hover:shadow-lg hover:shadow-black transition-all duration-500 hover:delay-300 hover:scale-x-[2.5] hover:scale-y-[2.5] mx-0 hover:mx-14 hover:cursor-pointer">
                   <MovieCard item={item} />
                 </div>
               </div>
