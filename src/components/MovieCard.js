@@ -19,11 +19,11 @@ const MovieCard = ({ item }) => {
 
   if (!poster_path) return;
   return (
-    <div className="w-max transition-all ease-in-out hover:delay-200 md:hover:h-96 h-60 md:h-80">
+    <div className=" w-max transition-all ease-in-out hover:delay-[600ms] md:hover:h-96 h-60 md:h-80">
       <img
         onMouseEnter={handleHover}
         onMouseLeave={handleLeave}
-        className="rounded-md z-12 transition-all duration-300 hover:delay-150 hover:border-white hover:opacity-0 h-full"
+        className="rounded-md z-12 transition-all duration-500 hover:delay-[400ms] hover:border-white hover:opacity-0 h-full"
         alt="Movie Card"
         src={IMG_CDN + poster_path}
       />

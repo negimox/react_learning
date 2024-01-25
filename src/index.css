@@ -12,6 +12,13 @@
   scrollbar-width: none; /* Firefox */
 }
 
+.you iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
 .youtube {
   position: fixed;
   z-index: -99999;

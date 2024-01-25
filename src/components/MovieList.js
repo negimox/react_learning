@@ -9,14 +9,15 @@ const MovieList = ({ movies, title, index }) => {
       <div className="relative">
         <div
           className={
-            "flex overflow-x-hidden scroll-smooth no-scrollbar list-" + index
+            "flex overflow-y-hidden overflow-x-hidden scroll-smooth no-scrollbar list-" +
+            index
           }
         >
           {movies.length > 7 && <Arrow type="l" index={index} />}
           <div className="flex justify-center">
             {movies.map((item, index) => (
               <div className={index === 0 ? "m-auto ml-8 mr-4" : "m-auto pr-4"}>
-                <div className="hover:shadow-lg hover:shadow-black transition-all duration-500 hover:delay-300 hover:scale-x-[2.5] hover:scale-y-[2.5] mx-0 hover:mx-14 hover:cursor-pointer">
+                <div className="hover:shadow-lg hover:shadow-black transition-all duration-300 hover:delay-700 hover:scale-x-[2.5] hover:scale-y-[2.5]  mx-0 hover:mx-14 hover:cursor-pointer">
                   <MovieCard item={item} />
                 </div>
               </div>
