@@ -3,21 +3,21 @@ import MovieCard from "./MovieCard";
 
 const MovieList = ({ movies, title, index }) => {
   return (
-    <div className="pb-14 px-6 text-white">
+    <div className="pb-14 px-2 md:px-6 text-white">
       <h1 className="py-6 font-medium text-xl md:text-3xl">{title}</h1>
 
       <div className="relative">
         <div
           className={
-            "flex overflow-y-hidden overflow-x-hidden scroll-smooth no-scrollbar list-" +
+            "flex overflow-y-hidden whitespace-nowrap overflow-x-hidden scroll-smooth no-scrollbar list-" +
             index
           }
         >
           {movies.length > 7 && <Arrow type="l" index={index} />}
           <div className="flex justify-center">
             {movies.map((item, index) => (
-              <div className={index === 0 ? "m-auto ml-8 mr-4" : "m-auto pr-4"}>
-                <div className="hover:shadow-lg hover:shadow-black transition-all duration-300 hover:delay-700 hover:scale-x-[2.5] hover:scale-y-[2.5]  mx-0 hover:mx-14 hover:cursor-pointer">
+              <div className={index === 0 ? "m-auto mr-4" : "m-auto pr-4"}>
+                <div className="hover:shadow-lg hover:shadow-black transition-all duration-300 hover:delay-700 hover:scale-x-[2.5] hover:scale-y-[2.5] mx-0 hover:mx-14 hover:cursor-pointer">
                   <MovieCard item={item} />
                 </div>
               </div>

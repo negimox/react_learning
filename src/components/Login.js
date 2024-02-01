@@ -126,7 +126,7 @@ const Login = () => {
           className="rounded-md p-4 my-4 w-full bg-neutral-800"
         />
         <button
-          className="hover:cursor-pointer rounded-md px-2 py-4 my-8 bg-red-700 w-full"
+          className="hover:cursor-pointer rounded-md px-2 py-4 my-8 bg-red-700 hover:bg-red-800 w-full"
           onClick={handleButtonClick}
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
@@ -136,7 +136,7 @@ const Login = () => {
           onClick={toggleSignInForm}
         >
           {isSignInForm
-            ? "New to Netflix? Sign up now."
+            ? "New to Cinewatch? Sign up now."
             : "Already have an account? Sign in now."}
         </p>
       </form>

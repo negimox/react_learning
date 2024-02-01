@@ -1,5 +1,6 @@
 import MovieList from "./MovieList";
 import { useSelector } from "react-redux";
+import SecondaryShimmer from "./SecondaryShimmer";
 
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
@@ -10,11 +11,20 @@ const SecondaryContainer = () => {
     !movies.popularMovies ||
     !movies.topRatedMovies
   )
-    return;
+    return (
+      <>
+        <SecondaryShimmer />
+        <SecondaryShimmer />
+        <SecondaryShimmer />
+        <SecondaryShimmer />
+        <SecondaryShimmer />
+      </>
+    );
+
   return (
-    <div className="bg-black md:pt-16 lg:pt-0">
-      <div className="w-screen h-screen absolute z-8 bg-gradient-to-t from-black via-black via-[98%] md:via-[92%]"></div>
-      <div className="lg:-mt-[12%] md:-mt-[8%] -mt-[5%] pl-0 lg:pl-7 relative z-12">
+    <div className="bg-black md:pt-16 lg:pt-0 select-none">
+      <div className="w-full h-screen absolute z-[5] bg-gradient-to-t from-black via-black via-[98%] md:via-[92%]"></div>
+      <div className="lg:-mt-[10%] md:-mt-[8%] -mt-[5%] pl-0 relative z-10">
         <MovieList
           title={"Now Playing"}
           movies={movies.nowPlayingMovies.slice(1)}

@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "cinediscover",
+    "site": "cinewatch",
     "public": "build",
     "ignore": [
       "firebase.json",

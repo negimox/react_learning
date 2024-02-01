@@ -53,8 +53,8 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
   return (
-    <div className="absolute flex flex-col justify-center md:flex-row md:justify-between px-8 py-2 z-10 w-screen bg-gradient-to-b from-black">
-      <img className="w-44 mx-auto md:mx-0" src={LOGO_URL} alt="logo" />
+    <div className="absolute flex flex-col justify-center md:flex-row md:justify-between px-8 py-2 z-50 w-full bg-gradient-to-b from-black">
+      <img className="w-40 mx-auto md:mx-0" src={LOGO_URL} alt="logo" />
       {userData && (
         <div className="flex flex-wrap mx-auto md:mx-0 md:px-8 md:py-2 items-center">
           {gptView && (
