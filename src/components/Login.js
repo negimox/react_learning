@@ -96,6 +96,7 @@ const Login = () => {
       />
 
       <form
+        name="login"
         onSubmit={(e) => {
           e.preventDefault();
         }}

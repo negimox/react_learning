@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.custom-select {
+  @apply bg-transparent p-2 rounded; /* Set your desired background color, padding, and border radius here */
+}
+
+.custom-select option {
+  @apply bg-neutral-900; /* Set background color and text color for options */
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -12,28 +20,7 @@
   scrollbar-width: none; /* Firefox */
 }
 
-.you iframe {
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-}
-
-.youtube {
-  position: fixed;
-  z-index: -99999;
-  -webkit-user-select: none;
-  user-select: none;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -ms-transform: scale(2, 3);
-  -webkit-transform: scale(2, 3);
-  transform: scale(2, 3);
-}
-
-/* === range theme and appearance === */
+/* === custom range theme and appearance === */
 input[type="range"] {
   color: white;
   --thumb-height: 1.125em;

@@ -15,6 +15,7 @@ const SecondaryShimmer = () => {
               <div className="flex justify-center">
                 {movies.map((item, index) => (
                   <div
+                    key={index}
                     className={index === 0 ? "m-auto ml-8 mr-4" : "m-auto pr-4"}
                   >
                     <div className="w-52 bg-neutral-700 h-60 md:h-80"></div>

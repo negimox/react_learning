@@ -11,6 +11,10 @@ const appStore = configureStore({
     gpt: gptReducer,
     config: configReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default appStore;
