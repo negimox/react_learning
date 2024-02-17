@@ -4,8 +4,6 @@ import { ICO_VOLUME, ICO_VOLUME_MUTE } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addMainVideo } from "../utils/configSlice";
 
-let total, myTimer, time, playerTimeDifference;
-
 const Video = ({ trailerVideo, small, isGradient }) => {
   const [ready, setReady] = useState(false);
   const mainVideo = useRef(null);
@@ -92,7 +90,7 @@ const Video = ({ trailerVideo, small, isGradient }) => {
           <div
             className={
               small
-                ? "w-full z-50 flex justify-end flex-row fixed bottom-[30%] -right-[25%] scale-50"
+                ? "w-full flex justify-end flex-row fixed bottom-[30%] -right-[25%] scale-50"
                 : "w-max z-30 flex justify-end flex-row absolute bottom-[10%] lg:bottom-[15%] right-2"
             }
             onMouseLeave={handleMouseExit}

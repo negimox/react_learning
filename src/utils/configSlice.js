@@ -7,7 +7,7 @@ const configSlice = createSlice({
     mainVideo: null,
     infoShow: false,
     infoItem: null,
-    accent: "#E50914",
+    accent: "#000000",
   },
   reducers: {
     changeLang: (state, action) => {

@@ -6,22 +6,23 @@ import {
 } from "./constants";
 
 const Arrow = ({ type, index }) => {
+  let activeDrag = false;
   const isRight = type === "r";
   const tabsList = document.querySelector("." + "list-" + index);
-  const arrowList = document.querySelectorAll(".arrow");
+  const arrowList = document.querySelectorAll(".arrow-" + index);
   //console.log(arrowOther);
   // const arrowOther = document.querySelector("." + isRight ? "l" : "r");
   // const [display, setDisplay] = useState(isRight ?  "r flex" : "l hidden");
   const cssPos = isRight
-    ? " -right-1 top-0 bottom-0 md:-right-5 bg-gradient-to-l l flex "
-    : " -left-1 top-0 bottom-0 md:-left-3 bg-gradient-to-r r hidden ";
+    ? " -right-1 top-0 bottom-0 md:-right-5 bg-gradient-to-l flex "
+    : " -left-1 top-0 bottom-0 md:-left-3 bg-gradient-to-r hidden ";
 
-  const handleIcons = debounce((amt) => {
+  const handleIcons = (amt) => {
     const scrollVal = Math.round(tabsList.scrollLeft + amt);
     const scrollWidth = tabsList.scrollWidth - tabsList.clientWidth;
     arrowList[0].style.display = scrollVal > 0 ? "flex" : "none";
     arrowList[1].style.display = scrollWidth > scrollVal ? "flex" : "none";
-  }, 320);
+  };
 
   const handleArrowClick = () => {
     const incrementAmt = isRight
@@ -31,10 +32,33 @@ const Arrow = ({ type, index }) => {
     handleIcons(incrementAmt);
   };
 
+  if (!tabsList) return;
+  tabsList.addEventListener("pointermove", (e) => {
+    if (!activeDrag) return;
+    if (window.innerWidth < 768) {
+      tabsList.style.scrollBehavior = "auto";
+      tabsList.scrollLeft -= e.movementX;
+    }
+  });
+
+  tabsList.addEventListener("pointerdown", () => {
+    if (window.innerWidth < 768) {
+      activeDrag = true;
+    }
+  });
+  tabsList.addEventListener("pointerup", () => {
+    if (window.innerWidth < 768) {
+      tabsList.style.scrollBehavior = "smooth";
+      activeDrag = false;
+    }
+  });
+
   return (
     <div
       className={
-        "transition-all duration-1000 arrow justify-center absolute z-20" +
+        "transition-all duration-1000 arrow-" +
+        index +
+        " justify-center absolute z-20" +
         cssPos +
         "h-[100%] top-0 from-black via-black via-15%"
       }

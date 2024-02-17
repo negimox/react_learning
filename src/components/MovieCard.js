@@ -41,14 +41,22 @@ const MovieCard = ({ item }) => {
       <div
         onClick={handleClick}
         onMouseLeave={handleLeave}
-        className="w-max transition-all ease-in hover:delay-500 md:hover:h-96 h-52 md:h-80"
+        className="w-max transition-all ease-in hover:delay-500 md:hover:h-96 h-52 md:h-80 z-50"
       >
+        {/* SM DEVICES */}
+        <img
+          className="z-10 transition-all duration-300 w-max h-full md:hidden block pointer-events-none"
+          alt="Movie Card Mobile"
+          src={IMG_CDN + poster_path}
+        />
+        {/* MD,LG DEVICES */}
         <img
           onMouseEnter={handleHover}
           className={
-            "z-10 transition-all duration-300 w-max h-full " + imgOpacity
+            "z-10 transition-all duration-300 w-max h-full hidden md:inline-block " +
+            imgOpacity
           }
-          alt="Movie Card"
+          alt="Movie Card MD, LG Devices"
           src={IMG_CDN + poster_path}
         />
         {isHover && trailer ? (

@@ -10,6 +10,10 @@
   @apply bg-neutral-900; /* Set background color and text color for options */
 }
 
+.hover-black {
+  @apply transition-all duration-200 hover:bg-neutral-950/65 rounded-full bg-opacity-0 hover:bg-opacity-100;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

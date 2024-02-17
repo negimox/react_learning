@@ -10,20 +10,18 @@ import {
   ICO_VOLUME_MUTE,
 } from "../utils/constants";
 import { useSelector } from "react-redux";
-import VideoTime from "./VideoTime";
 
 const VideoControls = forwardRef(({ onToggleFulscreen, time }, ref) => {
   // let interval;
   const volume = useRef(null);
+  const video = useSelector((store) => store.config.mainVideo);
 
   const [state, setState] = useState({
-    playing: true,
-    mute: true,
+    playing: video.getPlayerState() === 1 ? true : false,
+    mute: false,
     fullscreen: false,
     displayChange: false,
   });
-
-  const video = useSelector((store) => store.config.mainVideo);
 
   // console.log(state.mute);
   const handlePlayClick = () => {
@@ -66,25 +64,26 @@ const VideoControls = forwardRef(({ onToggleFulscreen, time }, ref) => {
   return (
     <div
       ref={ref}
-      className="text-white absolute h-screen top-0 left-0 right-0 bottom-0 bg-neutral-800/45 z-10 flex flex-col justify-between"
+      // onMouseDown={handleMouseDown}
+      className="transition-all duration-300 text-white absolute h-screen top-0 left-0 right-0 bottom-0 bg-neutral-800/35 flex flex-col justify-between"
     >
       {/* Having 3 rows of first video title, second controls, lastly slider for video duration etc. */}
-      <div class="grid grid-cols-6 gap-4 h-full m-4">
+      <div class="z-20 grid grid-cols-6 gap-4 h-full p-4 bg-gradient-to-b from-neutral-900 via-transparent">
         {/* TOP CONTROLS */}
-        <div class="col-span-6">
+        <div class="col-span-6 select-none">
           <h2 className="text-2xl font-bold">{video.videoTitle}</h2>
         </div>
 
         {/* MIDDLE CONTROLS */}
-        <div class="col-span-6 flex flex-row justify-center">
-          <button onClick={handleBackwardClick} className="">
+        <div class="col-span-6 flex flex-row justify-center self-center">
+          <button className="hover-black p-4" onClick={handleBackwardClick}>
             <ICO_BACKWARD />
           </button>
-          <button onClick={handlePlayClick}>
+          <button className="hover-black p-4" onClick={handlePlayClick}>
             {state.playing ? <ICO_PAUSE /> : <ICO_PLAY />}
           </button>
 
-          <button onClick={handleForwardClick}>
+          <button className="hover-black p-4" onClick={handleForwardClick}>
             <ICO_FORWARD />
           </button>
         </div>
@@ -95,48 +94,26 @@ const VideoControls = forwardRef(({ onToggleFulscreen, time }, ref) => {
         {/* BOTTOM CONTROLS */}
         <div class="col-span-6 flex flex-col-reverse">
           <div className="w-full">
-            <input
-              //   ref={volume}
-              onChange={handleSeekBarChange}
-              className="w-full"
-              type="range"
-              min="0"
-              value={time.played_raw}
-              max={time.duration}
-            />
-            {/* <VideoTime type="bar" /> */}
-
-            {/* ADDITIONAL VIDEO CONTROLS */}
-            <div className="flex flex-row justify-between">
+            {/* ADDITIONAL VIDEO CONTROLS FOR SM Devices */}
+            <div className="flex md:hidden flex-row justify-between">
               {/* LEFT SIDE */}
-              <div class="flex flex-row mx-4">
-                <button onClick={handleVolumeClick}>
-                  {state.mute ? <ICO_VOLUME_MUTE /> : <ICO_VOLUME />}
-                </button>
-                <input
-                  ref={volume}
-                  onChange={handleVolumeChange}
-                  className="my-auto ml-2"
-                  type="range"
-                  min="0"
-                  max="100"
-                />
+              <div class="flex flex-row mx-1 md:mx-4 text-lg md:text-lg">
                 <button
                   onClick={handleFormatChangeClick}
                   className="my-auto ml-2"
                 >
                   {state.displayChange
                     ? "-" + time.played_rev
-                    : time.played + " | " + time.duration_text}
+                    : time.played + " / " + time.duration_text}
                 </button>
                 {/* <VideoTime type="duration" /> */}
               </div>
 
               {/* RIGHT SIDE */}
-              <div class="flex flex-row mx-4">
+              <div class="flex flex-row mx-1 md:mx-4 text-sm md:text-lg">
                 <select
                   onChange={handlePlayBackRateChange}
-                  className="my-auto bg-transparent custom-select"
+                  className="my-auto bg-transparent custom-select cursor-pointer"
                 >
                   {rates.map((rate) =>
                     rate === 1 ? (
@@ -150,7 +127,69 @@ const VideoControls = forwardRef(({ onToggleFulscreen, time }, ref) => {
                 </select>
                 <button
                   onClick={handleFullscreenClick}
-                  className="my-auto ml-4"
+                  className="my-auto ml-1 md:ml-4 hover-black p-2"
+                >
+                  {state.fullscreen ? <ICO_MINIMIZE /> : <ICO_FULLSCREEN />}{" "}
+                </button>
+              </div>
+            </div>
+            <input
+              //   ref={volume}
+              onChange={handleSeekBarChange}
+              className="w-full hover:cursor-pointer"
+              type="range"
+              min="0"
+              value={time.played_raw}
+              max={time.duration}
+            />
+            {/* <VideoTime type="bar" /> */}
+
+            {/* ADDITIONAL VIDEO CONTROLS FOR MD,LG Devices */}
+            <div className="hidden md:flex flex-row justify-between">
+              {/* LEFT SIDE */}
+              <div class="flex flex-row mx-1 md:mx-4 text-sm md:text-lg">
+                <button className="hover-black p-2" onClick={handleVolumeClick}>
+                  {state.mute ? <ICO_VOLUME_MUTE /> : <ICO_VOLUME />}
+                </button>
+                <input
+                  ref={volume}
+                  onChange={handleVolumeChange}
+                  className="my-auto ml-2"
+                  type="range"
+                  value={video.getVolume()}
+                  min="0"
+                  max="100"
+                />
+                <button
+                  onClick={handleFormatChangeClick}
+                  className="my-auto ml-2"
+                >
+                  {state.displayChange
+                    ? "-" + time.played_rev
+                    : time.played + " / " + time.duration_text}
+                </button>
+                {/* <VideoTime type="duration" /> */}
+              </div>
+
+              {/* RIGHT SIDE */}
+              <div class="flex flex-row mx-1 md:mx-4 text-sm md:text-lg">
+                <select
+                  onChange={handlePlayBackRateChange}
+                  className="my-auto bg-transparent custom-select cursor-pointer"
+                >
+                  {rates.map((rate) =>
+                    rate === 1 ? (
+                      <option value="normal" selected>
+                        Normal
+                      </option>
+                    ) : (
+                      <option value={rate}>{rate}</option>
+                    )
+                  )}
+                </select>
+                <button
+                  onClick={handleFullscreenClick}
+                  className="my-auto ml-1 md:ml-4 hover-black p-2"
                 >
                   {state.fullscreen ? <ICO_MINIMIZE /> : <ICO_FULLSCREEN />}{" "}
                 </button>

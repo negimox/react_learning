@@ -51,6 +51,8 @@ const Player = () => {
   const handleMouseMove = () => {
     if (!playerControls.current) return;
     playerControls.current.style.visibility = "visible";
+    playerControls.current.style.opacity = 1;
+    playerControls.current.style.cursor = "default";
     count = 0;
   };
 
@@ -67,15 +69,15 @@ const Player = () => {
 
     // setReady(true);
     //dispatch(addMainVideo(mainVideo.current));
-    // small && mainVideo.current.unMute();
-    // small && mainVideo.current.playVideo();
+    event.target.unMute();
+    event.target.setVolume(100);
     // mainVideo.current.pauseVideo();
     // Now you can use playerRef.current to reference the internal player
   };
 
   const onStateChange = (event) => {
     //
-    if (event.data == 1) {
+    if (event.data === 1) {
       myTimer = setInterval(() => {
         // TIME CALC
         const elapsed_sec = event.target.getCurrentTime();
@@ -94,6 +96,8 @@ const Player = () => {
         if (count > 3) {
           // console.log(playerControls.current.style);
           playerControls.current.style.visibility = "hidden";
+          playerControls.current.style.opacity = 0;
+          playerControls.current.style.cursor = "none";
           count = 0;
         }
         if (playerControls.current.style.visibility === "visible") {

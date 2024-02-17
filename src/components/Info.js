@@ -10,8 +10,9 @@ const Info = () => {
   const mainVid = useSelector((store) => store.config.mainVideo);
   const { title, overview, vote_average, release_date, backdrop_path } = movie;
   const handleClick = () => {
-    mainVid.playVideo();
     dispatch(changeInfoShow());
+    if (!mainVid) return;
+    mainVid.playVideo();
   };
   const pauseVideo = debounce(() => {
     if (!mainVid) return;
@@ -23,7 +24,7 @@ const Info = () => {
   return (
     <div className="fixed top-0 left-0 w-screen h-screen py-20 px-1 md:px-[15%] z-[60]">
       <div
-        onClick={handleClick}
+        onMouseDown={handleClick}
         className="bg-black/75 w-full h-full absolute left-0 top-0"
       ></div>
       <div className="relative w-full h-full bg-neutral-900 text-neutral-400 rounded-md">
@@ -33,7 +34,7 @@ const Info = () => {
           alt="Movie Bg"
           src={IMG_CDN + backdrop_path}
         />
-        <div onClick={null} className="py-0 md:py-10 px-4 md:px-16">
+        <div onMouseDown={null} className="py-0 md:py-10 px-4 md:px-16">
           <div className="w-full h-screen">
             <div className="w-fit flex flex-col pt-12 absolute z-[30] md:pt-0 justify-center">
               <h1 className="md:m-0 ml-2 font-medium text-2xl md:text-4xl text-white">

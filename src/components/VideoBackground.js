@@ -5,6 +5,8 @@ import Video from "./Video";
 import { useEffect, useRef, useState } from "react";
 import { changeAccent } from "../utils/configSlice";
 
+let finished = false;
+
 const VideoBackground = ({ movieID }) => {
   useMovieVideo(movieID);
   const file = useRef(null);
@@ -13,15 +15,19 @@ const VideoBackground = ({ movieID }) => {
     (store) => store.movies?.nowPlayingMovies[0].poster_path
   );
   const dispatch = useDispatch();
+  const accent = useSelector((store) => store.config.accent);
 
   const image = new Image();
-  image.src = "https://image.tmdb.org/t/p/w780/zVMyvNowgbsBAL6O6esWfRpAcOb.jpg";
+  image.src =
+    "https://api.codetabs.com/v1/proxy?quest=https://image.tmdb.org/t/p/w780/zVMyvNowgbsBAL6O6esWfRpAcOb.jpg";
   image.crossOrigin = "Anonymous";
   // const image = new Image();
-  const [hexCodeGlobal, setHexCodeGlobal] = useState("#000000");
-  const [imgOpacity, setImgOpacity] = useState("100");
+  const [imgOpacity, setImgOpacity] = useState("opacity-100");
+  const [accentState, setAccent] = useState(accent);
   // const file = imgFile.files[0];
-  const imgColor = () => {
+
+  image.onload = function () {
+    if (finished) return;
     // const img = document.getElementById("myimg");
     //file.current.setAttribute("crossOrigin", "");
     //file.current.crossOrigin = "Anonymous";
@@ -40,10 +46,10 @@ const VideoBackground = ({ movieID }) => {
     const quant = quantization(rgbData, 4);
     // console.log(quant);
     const hexCode = rgbToHex(quant[0].r, quant[0].g, quant[0].b).toLowerCase();
-    console.log("#" + hexCode.toString());
-    setHexCodeGlobal("#" + hexCode.toString());
-    setImgOpacity("0");
-    // dispatch(changeAccent("#" + hexCode));
+    // console.log("#" + hexCode.toString());
+    finished = true;
+    dispatch(changeAccent("#" + hexCode));
+    setImgOpacity("opacity-0");
   };
 
   const buildRgb = (imageData) => {
@@ -142,18 +148,23 @@ const VideoBackground = ({ movieID }) => {
       "0123456789ABCDEF".charAt(n % 16)
     );
   }
+
+  useEffect(() => {
+    setAccent(accent);
+    finished && setImgOpacity("opacity-0");
+  }, [accent]);
+
   return (
     <div className="">
       <div
         className={
-          "bg-gradient-to-b from-black md:hidden block z-20 w-full h-[85vh] absolute top-0 left-0 transition-all duration-500 opacity-" +
+          "bg-gradient-to-b from-black md:hidden block z-20 w-full h-[85vh] absolute top-0 left-0 transition-all duration-500 " +
           imgOpacity
         }
       ></div>
       <div
         style={{
-          backgroundImage:
-            "linear-gradient(to bottom, " + hexCodeGlobal + ", #000000",
+          backgroundImage: "linear-gradient(to bottom, " + accent + ", #000000",
         }}
         className={`opacity-100 md:hidden block z-10 w-full h-[85vh] absolute top-0 left-0`}
       ></div>
@@ -164,7 +175,7 @@ const VideoBackground = ({ movieID }) => {
       <div className="relative flex justify-center md:hidden w-[88%] h-[70%] mx-auto">
         <div className="rounded-md w-full h-full absolute top-0 bottom-0 left-0 right-0 z-30 bg-gradient-to-t from-neutral-900 from-[5%] via-transparent"></div>
         <img
-          onLoad={imgColor}
+          // onClick={imgColor}
           ref={file}
           className="border-white/45 border-2 rounded-md w-full h-full object-cover object-center z-20 shadow-lg shadow-neutral-900"
           id="imgfile"

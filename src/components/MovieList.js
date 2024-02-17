@@ -45,7 +45,7 @@ const MovieList = ({ movies, title, index }) => {
                   onClick={() => handleClick(item)}
                   onMouseEnter={handleHover}
                   onMouseLeave={handleUnHover}
-                  className="bg-black hover:delay-700 hover:shadow-lg hover:shadow-black transition-all duration-300 hover:scale-x-[2.5] hover:scale-y-[2.5] mx-0 hover:mx-24 hover:cursor-pointer"
+                  className="bg-black md:hover:delay-700 md:hover:shadow-lg md:hover:shadow-black transition-all duration-300 md:hover:scale-x-[2.5] md:hover:scale-y-[2.5] mx-0 md:hover:mx-24 hover:cursor-pointer"
                 >
                   <MovieCard item={item} />
                 </div>
