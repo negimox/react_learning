@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import useSelectTrailer from "../hooks/useSelectTailer";
 import Video from "./Video";
 import debounce from "debounce";
-import Test from "./Test";
 
 const MovieCard = ({ item }) => {
   const { poster_path, id } = item;

@@ -178,3 +178,29 @@ input[type="range"]:active::-moz-range-progress {
 input[type="range"]:disabled::-moz-range-thumb {
   cursor: not-allowed;
 }
+
+.caraousel {
+  grid-auto-columns: calc(
+    (100vw - (floor((100vw + 1rem) / (213.33px + 1rem)) - 1) * 1rem) /
+      floor((100vw + 1rem) / (213.33px + 1rem))
+  );
+  gap: 1rem;
+  scroll-snap-type: x proximity;
+}
+
+/* @media screen and (min-width: 480px) {
+  .caraousel {
+    grid-auto-columns: calc((100% / 3) - 25px);
+    gap: 1rem;
+    scroll-snap-type: x proximity;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .caraousel {
+
+    grid-auto-columns: calc((100vh / 213.33px) - 23px);
+    gap: 1rem;
+    scroll-snap-type: x proximity;
+  }
+} */

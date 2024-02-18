@@ -1,4 +1,3 @@
-import debounce from "debounce";
 import {
   ICO_LEFT_ARROW,
   ICO_RIGHT_ARROW,

@@ -31,29 +31,39 @@ const MovieList = ({ movies, title, index }) => {
       <h1 className="pb-1 md:py-6 font-medium text-xl md:text-3xl">{title}</h1>
 
       <div className="relative">
-        <div
+        {/* <div
           className={
-            "flex overflow-y-hidden whitespace-nowrap overflow-x-hidden scroll-smooth no-scrollbar list-" +
+            "grid grid-flow-col caraousel overflow-y-hidden whitespace-nowrap overflow-x-hidden scroll-smooth no-scrollbar list-" +
+            index
+          }
+        > */}
+        {movies.length > 7 && <Arrow type="l" index={index} />}
+        <ul
+          className={
+            "grid grid-flow-col caraousel overflow-y-hidden whitespace-nowrap overflow-x-hidden scroll-smooth no-scrollbar list-" +
             index
           }
         >
-          {movies.length > 7 && <Arrow type="l" index={index} />}
-          <div className="flex justify-center">
-            {movies.map((item) => (
-              <div key={item.id} className="m-auto mr-4">
-                <div
-                  onClick={() => handleClick(item)}
-                  onMouseEnter={handleHover}
-                  onMouseLeave={handleUnHover}
-                  className="bg-black md:hover:delay-700 md:hover:shadow-lg md:hover:shadow-black transition-all duration-300 md:hover:scale-x-[2.5] md:hover:scale-y-[2.5] mx-0 md:hover:mx-24 hover:cursor-pointer"
-                >
-                  <MovieCard item={item} />
-                </div>
+          {movies.map((item) => (
+            <li key={item.id} className={"list-none my-auto flex"}>
+              <div
+                onClick={() => handleClick(item)}
+                onMouseEnter={handleHover}
+                onMouseLeave={handleUnHover}
+                // style={{
+                //   gridAutoColumns: "calc((100% / 3) - 25px)",
+                //   gap: "1rem",
+                //   scrollSnapType: "x proximity",
+                // }}
+                className="bg-black md:hover:delay-700 md:hover:shadow-lg md:hover:shadow-black transition-all duration-300 md:hover:scale-x-[2.5] md:hover:scale-y-[2.5] m-0 md:hover:mx-24 hover:cursor-pointer"
+              >
+                <MovieCard item={item} />
               </div>
-            ))}
-          </div>
-          {movies.length > 7 && <Arrow type="r" index={index} />}
-        </div>
+            </li>
+          ))}
+        </ul>
+        {movies.length > 7 && <Arrow type="r" index={index} />}
+        {/* </div> */}
       </div>
     </div>
   );
