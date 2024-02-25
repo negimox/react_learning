@@ -54,8 +54,7 @@ npx create-react-app project_name
 
   - ## useRef
 
-    This allows us to reference the value linked to an element. Used when we want updated/live value without re-rendering of   
-    the component.
+    This allows us to reference the value linked to an element. Used when we want updated/live value without re-rendering of the component.
 
     ```
     import {useRef} from "react";
